@@ -1,0 +1,17 @@
+<%= form_with url: '/static_pages', method: :get do |form| %>
+  <%= form.label :id, 'Flickr User ID: '%>
+  <%= form.text_field :id %>
+  <br>
+  <%= form.submit value: 'Find Photos' %>
+<% end %>
+
+<% if @photos %>
+  <% if @photos.empty? %>
+    No Photos Found
+  <% else %>
+    <% @photos.each do |photo| %>
+      <% photo_url = "https://live.staticflickr.com/#{photo.server}/#{photo.id}_#{photo.secret}_b.jpg" %>
+      <%= image_tag(photo_url) %>
+    <% end %>
+  <% end %>
+<% end %>
